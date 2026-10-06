@@ -23,9 +23,11 @@ import omni.timeline
 from omni.isaac.core.world import World
 
 # Import the Pegasus API for simulating drones
-from pegasus.simulator.params import ROBOTS, SIMULATION_ENVIRONMENTS
+from pegasus.simulator.params import SIMULATION_ENVIRONMENTS
 from pegasus.simulator.logic.vehicles.multirotor import Multirotor, MultirotorConfig
 from pegasus.simulator.logic.interface.pegasus_interface import PegasusInterface
+
+CUSTOM_USD = "/home/pranathikaruturi/Downloads/GitHub/Aero_Manipulator/assets/f550_v1/f550_gripper_boxpads/f550_gripper_boxpads.usda"
 
 # Import the custom python control backend
 import sys, os
@@ -77,10 +79,10 @@ class PegasusApp:
         )]
 
         Multirotor(
-            "/World/quadrotor1",
-            ROBOTS['Iris'],
+            "/World/f550_gripper",
+            CUSTOM_USD,
             0,
-            [2.3, -1.5, 0.07],
+            [0.0, 0.0, 0.0],
             Rotation.from_euler("XYZ", [0.0, 0.0, 0.0], degrees=True).as_quat(),
             config=config_multirotor1,
         )
