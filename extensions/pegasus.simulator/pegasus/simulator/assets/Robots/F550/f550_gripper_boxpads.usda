@@ -1,0 +1,52 @@
+#usda 1.0
+(
+    customLayerData = {
+        string creator = "URDF USD Converter v0.1.3"
+    }
+    defaultPrim = "f550_gripper"
+    doc = """Generated from Composed Stage of root layer /tmp/tmpogghp6pf/f550_gripper.usdc
+
+
+Generated from Composed Stage of root layer /tmp/urdf_import_f550_gripper_boxpads_dtltj9ob/usdex_f550_gripper_boxpads/f550_gripper.usdc
+
+
+Generated from Composed Stage of root layer /tmp/urdf_import_f550_gripper_boxpads_dtltj9ob/temp_f550_gripper_boxpads/f550_gripper_boxpads.usd
+
+
+Generated from Composed Stage of root layer /home/pranathikaruturi/Downloads/GitHub/Aero_Manipulator/assets/f550_v1/f550_gripper_boxpads/payloads/base.usd
+"""
+    kilogramsPerUnit = 1
+    metersPerUnit = 1
+    upAxis = "Z"
+)
+
+def Xform "f550_gripper" (
+    prepend references = @./payloads/base.usda@
+    variants = {
+        string Physics = "physx"
+    }
+    append variantSets = "Physics"
+)
+{
+    variantSet "Physics" = {
+        "mujoco" (
+            prepend payload = @./payloads/Physics/mujoco.usda@
+        ) {
+
+        }
+        "none" {
+
+        }
+        "physics" (
+            prepend payload = @./payloads/Physics/physics.usda@
+        ) {
+
+        }
+        "physx" (
+            prepend payload = @./payloads/Physics/physx.usda@
+        ) {
+
+        }
+    }
+}
+
