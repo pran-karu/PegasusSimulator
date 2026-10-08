@@ -118,6 +118,7 @@ class PegasusApp:
                 trajectory_file=None,
                 results_file=self.curr_dir
                 + "/results/f550_statistics.npz",
+                num_rotors=6,
             )
         ]
 

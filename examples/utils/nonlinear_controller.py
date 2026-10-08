@@ -33,19 +33,23 @@ class NonlinearController(Backend):
     pp. 2520-2525, doi: 10.1109/ICRA.2011.5980409.
     """
 
-    def __init__(self, 
-        trajectory_file: str = None, 
-        results_file: str=None, 
-        reverse=False, 
+    def __init__(
+        self,
+        trajectory_file: str = None,
+        results_file: str = None,
+        reverse=False,
         Kp=[10.0, 10.0, 10.0],
         Kd=[8.5, 8.5, 8.5],
         Ki=[1.50, 1.50, 1.50],
         Kr=[3.5, 3.5, 3.5],
-        Kw=[0.5, 0.5, 0.5]):
+        Kw=[0.5, 0.5, 0.5],
+        num_rotors=4,
+    ):
 
         # The current rotor references [rad/s]
-        self.input_ref = [0.0, 0.0, 0.0, 0.0]
-
+        self.num_rotors = num_rotors
+        self.input_ref = [0.0 for _ in range(self.num_rotors)]
+        
         # The current state of the vehicle expressed in the inertial frame (in ENU)
         self.p = np.zeros((3,))                   # The vehicle position
         self.R: Rotation = Rotation.identity()    # The vehicle attitude
