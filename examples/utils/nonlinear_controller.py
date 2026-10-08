@@ -67,7 +67,7 @@ class NonlinearController(Backend):
         self.int = np.array([0.0, 0.0, 0.0])
 
         # Define the dynamic parameters for the vehicle
-        self.m = 1.50        # Mass in Kg
+        self.m = 2.11038        # Mass in Kg
         self.g = 9.81       # The gravity acceleration ms^-2
 
         # Read the target trajectory from a CSV file inside the trajectories directory
@@ -210,13 +210,13 @@ class NonlinearController(Backend):
             yaw_rate_ref = self.trajectory[self.index, 14]
         # Or update the reference using the built-in trajectory
         else:
-            s = 0.6
-            p_ref = self.pd(self.total_time, s, self.reverse)
-            v_ref = self.d_pd(self.total_time, s, self.reverse)
-            a_ref = self.dd_pd(self.total_time, s, self.reverse)
-            j_ref = self.ddd_pd(self.total_time, s, self.reverse)
-            yaw_ref = self.yaw_d(self.total_time, s)
-            yaw_rate_ref = self.d_yaw_d(self.total_time, s)
+            # Fixed hover target in world coordinates
+            p_ref = np.array([2.3, -1.5, 3.0])
+            v_ref = np.zeros(3)
+            a_ref = np.zeros(3)
+            j_ref = np.zeros(3)
+            yaw_ref = 0.0
+            yaw_rate_ref = 0.0
 
         # -------------------------------------------------
         # Start the controller implementation

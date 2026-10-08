@@ -126,7 +126,7 @@ class PegasusApp:
             "/World/aeromanipulator1",
             CUSTOM_USD,
             0,
-            [2.3, -1.5, 1.0],
+            [2.3, -1.5, 3.0],
             Rotation.from_euler(
                 "XYZ",
                 [0.0, 0.0, 0.0],
