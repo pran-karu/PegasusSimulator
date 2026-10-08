@@ -30,7 +30,7 @@ from pegasus.simulator.logic.thrusters import QuadraticThrustCurve
 
 CUSTOM_USD = (
     "/home/pranathikaruturi/Downloads/GitHub/"
-    "Aero_Manipulator/scenes/config2_pegasus.usd"
+    "Aero_Manipulator/scenes/config2_pegasus2.usd"
 )
 
 # Import the custom python control backend
@@ -93,7 +93,7 @@ class PegasusApp:
                 1e-6,
             ],
 
-            "rot_dir": [-1, 1, -1, 1],
+            "rot_dir": [-1, 1, 1, -1],
 
             "min_rotor_velocity": [0, 0, 0, 0],
 
@@ -107,8 +107,8 @@ class PegasusApp:
 
         config_multirotor1.backends = [
             NonlinearController(
-                trajectory_file=None,
-                results_file=None,
+                trajectory_file=self.curr_dir + "/trajectories/pitch_relay_90_deg_2.csv",
+                results_file=self.curr_dir + "/results/config2_pitch_relay.npz",
                 num_rotors=4,
                 mass=2.41978,
             )

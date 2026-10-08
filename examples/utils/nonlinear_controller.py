@@ -189,10 +189,6 @@ class NonlinearController(Backend):
         
         if self.reveived_first_state == False:
             return
-
-        # TEMPORARY EQUAL-THRUST ACTUATOR TEST
-        self.input_ref = [850.0] * self.num_rotors
-        return
     
         # -------------------------------------------------
         # Update the references for the controller to track
@@ -283,8 +279,7 @@ class NonlinearController(Backend):
 
         # Use the allocation matrix provided by the Multirotor vehicle to convert the desired force and torque
         # to angular velocity [rad/s] references to give to each rotor
-        if self.vehicle:
-            self.input_ref = self.vehicle.force_and_torques_to_velocities(u_1, tau)
+        self.input_ref = self.vehicle.force_and_torques_to_velocities(u_1, tau)
 
         # ----------------------------
         # Statistics to save for later
