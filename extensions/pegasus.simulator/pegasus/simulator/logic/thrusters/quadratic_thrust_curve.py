@@ -99,6 +99,21 @@ class QuadraticThrustCurve(ThrustCurve):
             # Compute the rolling moment coefficient
             rolling_moment += self._rolling_moment_coefficient[i] * np.power(self._velocity[i], 2.0) * self._rot_dir[i]
 
+        if not hasattr(self, "_debug_count"):
+            self._debug_count = 0
+
+        self._debug_count += 1
+
+        if self._debug_count % 120 == 0:
+            print(
+                "[THRUST DEBUG]",
+                "input=", self._input_reference,
+                "velocity=", self._velocity,
+                "force=", self._force,
+                "total=", sum(self._force),
+                flush=True,
+            )
+
         # Update the rolling moment variable
         self._rolling_moment = rolling_moment
 

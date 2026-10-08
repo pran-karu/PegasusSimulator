@@ -44,6 +44,7 @@ class NonlinearController(Backend):
         Kr=[3.5, 3.5, 3.5],
         Kw=[0.5, 0.5, 0.5],
         num_rotors=4,
+        mass=2.41978,
     ):
 
         # The current rotor references [rad/s]
@@ -67,7 +68,7 @@ class NonlinearController(Backend):
         self.int = np.array([0.0, 0.0, 0.0])
 
         # Define the dynamic parameters for the vehicle
-        self.m = 2.11038        # Mass in Kg
+        self.m = mass        # Mass in Kg
         self.g = 9.81       # The gravity acceleration ms^-2
 
         # Read the target trajectory from a CSV file inside the trajectories directory
@@ -189,6 +190,10 @@ class NonlinearController(Backend):
         if self.reveived_first_state == False:
             return
 
+        # TEMPORARY EQUAL-THRUST ACTUATOR TEST
+        self.input_ref = [850.0] * self.num_rotors
+        return
+    
         # -------------------------------------------------
         # Update the references for the controller to track
         # -------------------------------------------------
