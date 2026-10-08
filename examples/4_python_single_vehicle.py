@@ -23,9 +23,11 @@ import omni.timeline
 from omni.isaac.core.world import World
 
 # Import the Pegasus API for simulating drones
-from pegasus.simulator.params import ROBOTS, SIMULATION_ENVIRONMENTS
+from pegasus.simulator.params import SIMULATION_ENVIRONMENTS
 from pegasus.simulator.logic.vehicles.multirotor import Multirotor, MultirotorConfig
 from pegasus.simulator.logic.interface.pegasus_interface import PegasusInterface
+
+CUSTOM_USD = "/home/pranathikaruturi/Downloads/GitHub/Aero_Manipulator/scenes/f550_gripper_boxpads.usd"
 
 # Import the custom python control backend
 import sys, os
@@ -70,21 +72,18 @@ class PegasusApp:
         # Try to spawn the selected robot in the world to the specified namespace
         config_multirotor1 = MultirotorConfig()
         config_multirotor1.backends = [NonlinearController(
-            trajectory_file=self.curr_dir + "/trajectories/pitch_relay_90_deg_2.csv",
-            results_file=self.curr_dir + "/results/single_statistics.npz",
-            Ki=[0.5, 0.5, 0.5],
-            Kr=[2.0, 2.0, 2.0]
+            trajectory_file=None,
+            results_file=self.curr_dir + "/results/aeromanipulator_statistics.npz",
         )]
 
         Multirotor(
-            "/World/quadrotor1",
-            ROBOTS['Iris'],
+            "/World/aeromanipulator1",
+            CUSTOM_USD,
             0,
-            [2.3, -1.5, 0.07],
+            [2.3, -1.5, 2.0],
             Rotation.from_euler("XYZ", [0.0, 0.0, 0.0], degrees=True).as_quat(),
             config=config_multirotor1,
         )
-
         # Reset the simulation environment so that all articulations (aka robots) are initialized
         self.world.reset()
 
